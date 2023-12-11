@@ -11,15 +11,18 @@ const PAGE_ABOUT = 'about'
 export function App() {
     const [page, setPage] = useState(PAGE_BOOKS)
     return (
-        <section className="app">
+        <div className="app">
             <header className="app-header">
                 <h1>Miss Books</h1>
+                <nav className="app-nav">
+                    <a href="#" onClick={() => setPage(PAGE_HOME)}>Home</a>
+                    <a href="#" onClick={() => setPage(PAGE_BOOKS)}>Books</a>
+                    <a href="#" onClick={() => setPage(PAGE_ABOUT)}>About</a>
+                </nav>
             </header>
-            <main className="container">
-                {page === PAGE_HOME && <HomePage />}
-                {page === PAGE_BOOKS && <BookIndex />}
-                {page === PAGE_ABOUT && <AboutUs />}
-            </main>
-        </section>
+            {page === PAGE_HOME && <HomePage />}
+            {page === PAGE_BOOKS && <BookIndex />}
+            {page === PAGE_ABOUT && <AboutUs />}
+        </div>
     )
 }

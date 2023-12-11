@@ -18,7 +18,7 @@ export function BookIndex() {
     console.log('render')
     if (! books) return <div className="loading">Loading...</div>
     return (
-        <section className="book-index">
+        <main className="book-index">
             {
                 ! selectedBookId &&
                     <React.Fragment>
@@ -31,6 +31,6 @@ export function BookIndex() {
                 selectedBookId &&
                     < BookDetails />
             }
-        </section>
+        </main>
     )
 }
