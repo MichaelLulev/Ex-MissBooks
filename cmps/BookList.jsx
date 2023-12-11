@@ -1,5 +1,6 @@
 import { BookPreview } from "./BookPreview.jsx"
 
+const { Link } = ReactRouterDOM
 
 export function BookList({ books, displayType, onSelectBookId}) {
     return (
@@ -7,9 +8,14 @@ export function BookList({ books, displayType, onSelectBookId}) {
             <h2>Book list</h2>
             <section className={`books-container ${displayType}`}>
             {
-                books.map(book => {
-                    return <BookPreview key={book.id} book={book} onSelectBookId={onSelectBookId}/>
-                })
+                books.map(book =>
+                    <Link to={`/books/${book.id}`} key={book.id}>
+                        <BookPreview
+                            book={book}
+                            onSelectBookId={onSelectBookId}
+                        />
+                    </Link>
+                )
             }
             </section>
         </section>

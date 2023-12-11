@@ -3,10 +3,11 @@ const { useState } = React
 export function LongText(props) {
     const [isLong, setIsLong] = useState(false)
 
+    const text = props.text
+    const length = props.length || 100
+
     function textToShow() {
-        const text = props.text
-        const length = props.length || 100
-        if (text <= length || isLong) return text
+        if (text.length <= length || isLong) return text
         return text.slice(0, length) + '...'
     }
 
@@ -19,7 +20,12 @@ export function LongText(props) {
             <span>
                 {textToShow()}
             </span>
-            <button onClick={toggleIsLong}>{isLong ? 'Less' : 'More'}</button>
+        {
+            length < text.length &&
+            <button onClick={toggleIsLong}>
+                {isLong ? 'Less' : 'More'}
+            </button>
+        }
         </span>
     )
 }
