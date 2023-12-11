@@ -7,13 +7,19 @@ export const bookService = {
     get,
     remove,
     save,
+    getDefaultFilter,
 }
 
 const BOOKS_KEY = 'missBooksData'
 
-function query() {
+function query(filterBy) {
     const prmBookData = storageService.query(BOOKS_KEY).then(books => {
         if (books.length === 0) books = _populateBooks()
+        if (filterBy) {
+            books = books.filter(book => RegExp(filterBy.title, 'i').test(book.title))
+            books = books.filter(book => book.publishedDate >= filterBy.publishedDateFrom)
+            books = books.filter(book => book.publishedDate <= filterBy.publishedDateTo)
+        }
         return books
     })
     return prmBookData
@@ -33,6 +39,15 @@ function save(book) {
     if (book.id) var prmBookData = storageService.put(BOOKS_KEY, book)
     else var prmBookData = storageService.post(BOOKS_KEY, book)
     return prmBookData
+}
+
+function getDefaultFilter() {
+    const filter = {
+        title: '',
+        publishedDateFrom: -9999,
+        publishedDateTo: +9999,
+    }
+    return filter
 }
 
 function _populateBooks() {

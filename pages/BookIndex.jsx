@@ -7,14 +7,27 @@ const { useState, useEffect } = React
 
 export function BookIndex() {
     const [books, setBooks] = useState(null)
+    const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
     const [displayType, setDisplayType] = useState('gallery')
+    const [selectedBookId, setSelectedBookId] = useState(null)
+
     useEffect(() => {
-        console.log('mount')
-        bookService.query().then(books => {
+        console.log('mount / filterBy')
+        bookService.query(filterBy).then(books => {
+            console.log(books)
             setBooks(books)
         })
-    }, [])
-    const selectedBookId = false
+    }, [filterBy])
+
+    function onSetFilterBy(newFilterBy) {
+        setFilterBy(newFilterBy)
+    }
+
+    function onSelectBookId(bookId) {
+        console.log(bookId)
+        setSelectedBookId(bookId)
+    }
+
     console.log('render')
     if (! books) return <div className="loading">Loading...</div>
     return (
@@ -23,13 +36,13 @@ export function BookIndex() {
                 ! selectedBookId &&
                     <React.Fragment>
                         <h1>Welcome to book index!</h1>
-                        <BookFilter />
-                        <BookList books={books} displayType={displayType} />
+                        <BookFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy}/>
+                        <BookList books={books} displayType={displayType} onSelectBookId={onSelectBookId}/>
                     </React.Fragment>
             }
             {
                 selectedBookId &&
-                    < BookDetails />
+                    <BookDetails bookId={selectedBookId} onBack={() => setSelectedBookId(null)} />
             }
         </main>
     )

@@ -21,22 +21,17 @@ main {
   overflow-y: scroll;
 }
 
-main > :first-child {
+h1, h2, h3, h4, h5, h6 {
+  margin: .5em 0 .5em;
+  font-family: 'Edu VIC WA NT Beginner', cursive;
+}
+
+:first-child:is(h1, h2, h3, h4, h5, h6) {
   margin-block-start: 0;
 }
 
-main > :last-child {
+:last-child:is(h1, h2, h3, h4, h5, h6) {
   margin-block-end: 0;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: .5em 0 .5em;
-  font-family: 'Edu VIC WA NT Beginner', cursive;
 }
 
 p {
