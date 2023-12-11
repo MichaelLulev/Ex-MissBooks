@@ -16,7 +16,7 @@ export function BookDetails({ bookId, onBack }) {
         <section className="book-details">
             <h2>Book Details</h2>
             {
-                book && <img src={`../assets/img/${thumbnail.current}`} alt="book-thumbnail" />
+                book && <img src={`assets/img/${thumbnail.current}`} alt="book-thumbnail" />
             }
             <p className="book-details-p">
                 {
