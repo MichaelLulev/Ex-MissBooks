@@ -1,4 +1,5 @@
 import { bookService } from "../services/book.service.js"
+import { LongText } from "./LongText.jsx"
 
 const { useState, useEffect, useRef } = React
 
@@ -22,7 +23,8 @@ export function BookDetails({ bookId, onBack }) {
                     ! book && 'Loading...'
                 }
                 {
-                    book && JSON.stringify(book)
+                    // book && JSON.stringify(book)
+                    book && <LongText text={JSON.stringify(book)} />
                 }
             </p>
             <button className="back" onClick={onBack}>
