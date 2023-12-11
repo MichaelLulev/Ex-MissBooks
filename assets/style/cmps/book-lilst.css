@@ -1,0 +1,17 @@
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    border-collapse: collapse;
+}
+
+.gallery img {
+    min-width: 150px;
+    width: 150px;
+}
+
+.gallery > * {
+    width: min-content;
+    border: 1px solid black;
+    overflow: hidden;
+}
