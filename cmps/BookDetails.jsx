@@ -26,7 +26,7 @@ export function BookDetails() {
     return (
         <main className="book-details">
             <h2>Book Details</h2>
-            <img src={`assets/img/${thumbnail.current}`} alt="book-thumbnail" />
+            <img src={`assets/img/${thumbnail.current}`} alt="thumbnail" />
             <p className="book-details-p">
                 <LongText text={JSON.stringify(book)} />
             </p>

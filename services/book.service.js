@@ -45,6 +45,7 @@ function save(book) {
 function getEmptyBook() {
     const newBook = {
         title: '',
+        thumbnail: '',
         publishedDate: new Date().getFullYear(),
     }
     return newBook

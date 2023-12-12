@@ -30,8 +30,16 @@ export function BookEdit(props) {
     function onSaveBookChanges(ev) {
         ev.preventDefault()
         bookService.save(book)
-            .then(() => navigate("/books"))
+            .then(books => {
+                console.log(books)
+                navigate("/books")
+            })
             .catch(err => console.error(err))
+    }
+
+    function onBack() {
+        if (params.bookId) navigate(`/books/${params.bookId}`)
+        else navigate('/books')
     }
     
     if (! book) return <main className="loading">Loading...</main>
@@ -57,6 +65,7 @@ export function BookEdit(props) {
                     />
                 </label>
                 <button className="save" onClick={onSaveBookChanges}>Save</button>
+                <button className="back" onClick={onBack}>Back</button>
             </form>
         </main>
     )
