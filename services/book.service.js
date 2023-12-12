@@ -5,11 +5,14 @@ import { booksData } from "../data/books.js"
 export const bookService = {
     query,
     get,
+    getNextBook,
+    getPrevBook,
     remove,
     save,
     getEmptyBook,
     getEmptyReview,
     addReview,
+    deleteReview,
     getDefaultFilter,
 }
 
@@ -31,6 +34,22 @@ function query(filterBy) {
 function get(bookId) {
     const prmBook = storageService.get(BOOKS_KEY, bookId)
     return prmBook
+}
+
+function getNextBook(bookId) {
+    return query().then(books => {
+        const bookIdx = books.findIndex(book => book.id === bookId)
+        const nextBookIdx = bookIdx === books.length - 1 ? 0 : bookIdx + 1
+        return books[nextBookIdx]
+    })
+}
+
+function getPrevBook(bookId) {
+    return query().then(books => {
+        const bookIdx = books.findIndex(book => book.id === bookId)
+        const prevBookIdx = bookIdx === 0 ? books.length - 1 : bookIdx - 1
+        return books[prevBookIdx]
+    })
 }
 
 function remove(bookId) {
@@ -65,8 +84,19 @@ function getEmptyReview() {
 function addReview(bookId, review) {
     return get(bookId).then(book => {
         if (! book.reviews) book.reviews = []
+        review.id = utilService.makeId()
         book.reviews.push(review)
         return save(book).then(books => books.find(book => book.id === bookId))
+    })
+}
+
+function deleteReview(bookId, reviewId) {
+    return get(bookId).then(book => {
+        if (book.reviews) {
+            const reviewIdx = book.reviews.findIndex(review => review.id === reviewId)
+            if (0 <= reviewIdx) book.reviews.splice(reviewIdx, 1)
+        }
+        return book
     })
 }
 
