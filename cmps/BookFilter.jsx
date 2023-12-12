@@ -1,4 +1,4 @@
-const { useState, useEffect } = React
+const { useState } = React
 
 export function BookFilter(props) {
     const [filterBy, setFilterBy] = useState(props.filterBy)

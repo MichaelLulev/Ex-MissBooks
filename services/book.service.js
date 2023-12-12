@@ -8,6 +8,8 @@ export const bookService = {
     remove,
     save,
     getEmptyBook,
+    getEmptyReview,
+    addReview,
     getDefaultFilter,
 }
 
@@ -49,6 +51,23 @@ function getEmptyBook() {
         publishedDate: new Date().getFullYear(),
     }
     return newBook
+}
+
+function getEmptyReview() {
+    const newReview = {
+        name: '',
+        rating: '',
+        readAt: '',
+    }
+    return newReview
+}
+
+function addReview(bookId, review) {
+    return get(bookId).then(book => {
+        if (! book.reviews) book.reviews = []
+        book.reviews.push(review)
+        return save(book).then(books => books.find(book => book.id === bookId))
+    })
 }
 
 function getDefaultFilter() {

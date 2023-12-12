@@ -1,16 +1,12 @@
 import { AppHeader } from "./cmps/AppHeader.jsx"
 import { BookDetails } from "./cmps/BookDetails.jsx"
 import { BookEdit } from "./cmps/BookEdit.jsx"
+import { UserMsg } from "./cmps/UserMsg.jsx"
 import { AboutUs } from "./pages/AboutUs.jsx"
 import { BookIndex } from "./pages/BookIndex.jsx"
 import { HomePage } from "./pages/HomePage.jsx"
 
-const { Routes, Route, Navigate } = ReactRouterDOM
-const { useState, useEffect } = React
-
-const PAGE_HOME = 'home'
-const PAGE_BOOKS = 'book'
-const PAGE_ABOUT = 'about'
+const { Routes, Route } = ReactRouterDOM
 
 export function App() {
     return (
@@ -24,6 +20,7 @@ export function App() {
                 <Route path="/books/edit/:bookId" element={<BookEdit />} />
                 <Route path="/about" element={<AboutUs />} />
             </Routes>
+            <UserMsg />
         </div>
     )
 }

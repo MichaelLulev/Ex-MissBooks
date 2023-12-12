@@ -1,9 +1,10 @@
 import { bookService } from "../services/book.service.js"
+import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js"
 
-const { Link, useParams, useNavigate } = ReactRouterDOM
-const { useState, useEffect, useRef } = React
+const { useParams, useNavigate } = ReactRouterDOM
+const { useState, useEffect } = React
 
-export function BookEdit(props) {
+export function BookEdit() {
     const [book, setBook] = useState(null)
     const params = useParams()
     const navigate = useNavigate()
@@ -29,12 +30,16 @@ export function BookEdit(props) {
 
     function onSaveBookChanges(ev) {
         ev.preventDefault()
+        const message = params.bookId ? 'edited' : 'saved'
         bookService.save(book)
             .then(books => {
-                console.log(books)
-                navigate("/books")
+                showSuccessMsg(`Book ${message} successfully`)
+                navigate('/books')
             })
-            .catch(err => console.error(err))
+            .catch(err => {
+                console.error(err)
+                showErrorMsg(`Error: Book not ${message}`)
+            })
     }
 
     function onBack() {
