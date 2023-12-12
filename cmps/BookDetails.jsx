@@ -22,20 +22,20 @@ export function BookDetails() {
             })
     }, [params.bookId])
 
+    if (! book) return <main className="loading">Loading...</main>
     return (
-        <section className="book-details">
+        <main className="book-details">
             <h2>Book Details</h2>
-        {
-            book && <img src={`assets/img/${thumbnail.current}`} alt="book-thumbnail" />
-        }
+            <img src={`assets/img/${thumbnail.current}`} alt="book-thumbnail" />
             <p className="book-details-p">
-            {
-                book && <LongText text={JSON.stringify(book)} /> || 'Loading...'
-            }
+                <LongText text={JSON.stringify(book)} />
             </p>
+            <Link to={`/books/edit/${book.id}`}>
+                <button>Edit</button>
+            </Link>
             <button className="back" onClick={() => navigate('/books')}>
                 Back
             </button>
-        </section>
+        </main>
     )
 }

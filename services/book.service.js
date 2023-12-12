@@ -7,6 +7,7 @@ export const bookService = {
     get,
     remove,
     save,
+    getEmptyBook,
     getDefaultFilter,
 }
 
@@ -39,6 +40,14 @@ function save(book) {
     if (book.id) var prmBookData = storageService.put(BOOKS_KEY, book)
     else var prmBookData = storageService.post(BOOKS_KEY, book)
     return prmBookData
+}
+
+function getEmptyBook() {
+    const newBook = {
+        title: '',
+        publishedDate: new Date().getFullYear(),
+    }
+    return newBook
 }
 
 function getDefaultFilter() {

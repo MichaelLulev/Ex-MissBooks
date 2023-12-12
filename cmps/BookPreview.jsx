@@ -6,6 +6,7 @@ export function BookPreview({ book, onSelectBookId }) {
         <article className="book-preview">
             <img src={`assets/img/${thumbnail}`} alt={`${book.title} thumbnail`} />
             <h3>{book.title}</h3>
+            <h3>{book.publishedDate}</h3>
         </article>
     )
 }

@@ -26,7 +26,7 @@ export function BookIndex() {
     }
 
     // console.log('render')
-    if (! books) return <div className="loading">Loading...</div>
+    if (! books) return <main className="loading">Loading...</main>
     return (
         <main className="book-index">
             <h1>Welcome to book index!</h1>
